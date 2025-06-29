@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التعليم التفاعلي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c7865;
+            --secondary: #004445;
+            --accent: #f8b400;
+            --light: #faf5e4;
+            --dark: #2d4059;
+            --success: #28a745;
+            --danger: #dc3545;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* الشريط العلوي */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-link i {
+            margin-left: 8px;
+        }
+
+        /* المحتوى الرئيسي */
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+            min-height: calc(100vh - 160px);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* صفحة التعليم */
+        .subjects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            border-color: var(--accent);
+        }
+
+        .subject-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .subject-name {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .subject-hours {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .subject-body {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .subject-desc {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .view-btn:hover {
+            background: #e6a800;
+            transform: translateY(-2px);
+        }
+
+        /* صفحة الدروس */
+        .lessons-container {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .lesson-btn {
+            background: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lesson-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(44, 120, 101, 0.3);
+        }
+
+        /* صفحة الفيديو */
+        .video-container {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .video-title {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            background: #000;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .quality-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .quality-btn {
+            background: #f0f0f0;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .quality-btn:hover, .quality-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .download-section {
+            margin-top: 2rem;
+            border-top: 1px solid #eee;
+            padding-top: 1.5rem;
+            text-align: center;
+        }
+
+        .download-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background: #e6a800;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(248, 180, 0, 0.3);
+        }
+
+        .back-btn {
+            display: block;
+            margin-top: 2rem;
+            text-align: center;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        /* صفحة الاختبارات */
+        .tests-container {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .test-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .test-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .test-header {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .test-name {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .test-type {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* صفحة الاختبار */
+        .quiz-container {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .score-box {
+            display: flex;
+            gap: 15px;
+        }
+
+        .correct-box, .wrong-box {
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .correct-box {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+        }
+
+        .wrong-box {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+        }
+
+        .question-count {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .question-container {
+            margin-bottom: 2rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 12px 15px;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .option-btn:hover {
+            background: #e9ecef;
+            border-color: #ced4da;
+        }
+
+        .option-btn.correct {
+            background: rgba(40, 167, 69, 0.1);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: rgba(220, 53, 69, 0.1);
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .next-btn {
+            display: block;
+            margin: 2rem auto 0;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .next-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 68, 69, 0.3);
+        }
+
+        /* التذييل */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content p {
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* الرسوم المتحركة */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* التعديلات للجوال */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .subjects-container, .tests-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>منصة التعليم التفاعلي</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" id="educationLink">
+                    <i class="fas fa-book-open"></i> التعليم
+                </a>
+                <a href="#" class="nav-link" id="testsLink">
+                    <i class="fas fa-clipboard-check"></i> الاختبارات
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main>
+        <div class="container">
+            <!-- صفحة التعليم -->
+            <div id="educationPage">
+                <h1 class="page-title">المواد التعليمية</h1>
+                
+                <div class="subjects-container" id="subjectsContainer">
+                    <!-- مادة الرياضيات -->
+                    <div class="subject-card" onclick="showLessons('رياضيات')">
+                        <div class="subject-header">
+                            <h2 class="subject-name">الرياضيات</h2>
+                            <p class="subject-hours">30 ساعة تعليمية</p>
+                        </div>
+                        <div class="subject-body">
+                            <p class="subject-desc">تعلم أساسيات الرياضيات والمفاهيم المتقدمة في الجبر والهندسة والإحصاء</p>
+                            <a class="view-btn">عرض الدروس</a>
+                        </div>
+                    </div>
+                    
+                    <!-- مادة الفيزياء -->
+                    <div class="subject-card" onclick="showLessons('فيزياء')">
+                        <div class="subject-header">
+                            <h2 class="subject-name">الفيزياء</h2>
+                            <p class="subject-hours">25 ساعة تعليمية</p>
+                        </div>
+                        <div class="subject-body">
+                            <p class="subject-desc">استكشف قوانين الفيزياء وتطبيقاتها في الحياة اليومية والتقنيات الحديثة</p>
+                            <a class="view-btn">عرض الدروس</a>
+                        </div>
+                    </div>
+                    
+                    <!-- مادة الكيمياء -->
+                    <div class="subject-card" onclick="showLessons('كيمياء')">
+                        <div class="subject-header">
+                            <h2 class="subject-name">الكيمياء</h2>
+                            <p class="subject-hours">22 ساعة تعليمية</p>
+                        </div>
+                        <div class="subject-body">
+                            <p class="subject-desc">تعرف على العناصر والتفاعلات الكيميائية وتطبيقاتها في الصناعة والطب</p>
+                            <a class="view-btn">عرض الدروس</a>
+                        </div>
+                    </div>
+                    
+                    <!-- مادة الأحياء -->
+                    <div class="subject-card" onclick="showLessons('أحياء')">
+                        <div class="subject-header">
+                            <h2 class="subject-name">الأحياء</h2>
+                            <p class="subject-hours">20 ساعة تعليمية</p>
+                        </div>
+                        <div class="subject-body">
+                            <p class="subject-desc">دراسة الكائنات الحية ووظائفها وتفاعلاتها مع البيئة وتطورها</p>
+                            <a class="view-btn">عرض الدروس</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- دروس المادة -->
+                <div class="lessons-container" id="lessonsContainer">
+                    <!-- سيتم ملؤها بالجافاسكريبت -->
+                </div>
+                
+                <!-- مشغل الفيديو -->
+                <div class="video-container" id="videoContainer">
+                    <h2 class="video-title" id="videoTitle">درس 1 - مقدمة في الرياضيات</h2>
+                    
+                    <div class="video-wrapper">
+                        <video id="lessonVideo" controls controlsList="nodownload">
+                            <source src="" type="video/mp4">
+                            متصفحك لا يدعم تشغيل الفيديو.
+                        </video>
+                    </div>
+                    
+                    <div class="quality-options">
+                        <button class="quality-btn active" onclick="changeQuality('240')">240p</button>
+                        <button class="quality-btn" onclick="changeQuality('360')">360p</button>
+                        <button class="quality-btn" onclick="changeQuality('480')">480p</button>
+                        <button class="quality-btn" onclick="changeQuality('720')">720p</button>
+                    </div>
+                    
+                    <div class="download-section">
+                        <button class="download-btn" onclick="downloadVideo()">
+                            <i class="fas fa-download"></i> تنزيل الفيديو
+                        </button>
+                    </div>
+                    
+                    <span class="back-btn" onclick="backToLessons()">
+                        <i class="fas fa-arrow-right"></i> العودة إلى الدروس
+                    </span>
+                </div>
+            </div>
+            
+            <!-- صفحة الاختبارات -->
+            <div id="testsPage" style="display: none;">
+                <h1 class="page-title">الاختبارات التفاعلية</h1>
+                
+                <div class="tests-container" id="testsContainer">
+                    <!-- اختبار الرياضيات -->
+                    <div class="test-card" onclick="startQuiz('رياضيات')">
+                        <div class="test-header">
+                            <h2 class="test-name">رياضيات</h2>
+                            <p class="test-type">اختبار نهائي</p>
+                        </div>
+                        <div class="subject-body">
+                            <p class="subject-desc">اختبر معلوماتك في الرياضيات عبر 5 أسئلة تفاعلية</p>
+                            <a class="view-btn">بدء الاختبار</a>
+                        </div>
+                    </div>
+                    
+                    <!-- اختبار الفيزياء -->
+                    <div class="test-card" onclick="startQuiz('فيزياء')">
+                        <div class="test-header">
+                            <h2 class="test-name">فيزياء</h2>
+                            <p class="test-type">اختبار نهائي</p>
+                        </div>
+                        <div class="subject-body">
+                            <p class="subject-desc">اختبر معلوماتك في الفيزياء عبر 5 أسئلة تفاعلية</p>
+                            <a class="view-btn">بدء الاختبار</a>
+                        </div>
+                    </div>
+                    
+                    <!-- اختبار الكيمياء -->
+                    <div class="test-card" onclick="startQuiz('كيمياء')">
+                        <div class="test-header">
+                            <h2 class="test-name">كيمياء</h2>
+                            <p class="test-type">اختبار نهائي</p>
+                        </div>
+                        <div class="subject-body">
+                            <p class="subject-desc">اختبر معلوماتك في الكيمياء عبر 5 أسئلة تفاعلية</p>
+                            <a class="view-btn">بدء الاختبار</a>
+                        </div>
+                    </div>
+                    
+                    <!-- اختبار الأحياء -->
+                    <div class="test-card" onclick="startQuiz('أحياء')">
+                        <div class="test-header">
+                            <h2 class="test-name">أحياء</h2>
+                            <p class="test-type">اختبار نهائي</p>
+                        </div>
+                        <div class="subject-body">
+                            <p class="subject-desc">اختبر معلوماتك في الأحياء عبر 5 أسئلة تفاعلية</p>
+                            <a class="view-btn">بدء الاختبار</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- اختبار تفاعلي -->
+                <div class="quiz-container" id="quizContainer">
+                    <div class="quiz-header">
+                        <div class="score-box">
+                            <div class="correct-box">
+                                <i class="fas fa-check"></i>
+                                <span id="correctCount">0</span>
+                            </div>
+                            <div class="wrong-box">
+                                <i class="fas fa-times"></i>
+                                <span id="wrongCount">0</span>
+                            </div>
+                        </div>
+                        <div class="question-count">
+                            السؤال <span id="currentQuestion">1</span> من 5
+                        </div>
+                    </div>
+                    
+                    <div class="question-container">
+                        <h3 class="question-text" id="questionText">ما هي نتيجة جمع 5 + 7؟</h3>
+                        
+                        <div class="options-container" id="optionsContainer">
+                            <!-- سيتم ملؤها بالجافاسكريبت -->
+                        </div>
+                    </div>
+                    
+                    <button class="next-btn" id="nextBtn" onclick="nextQuestion()">التالي</button>
+                    
+                    <span class="back-btn" onclick="backToTests()">
+                        <i class="fas fa-arrow-right"></i> العودة إلى الاختبارات
+                    </span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2023 منصة التعليم التفاعلي. جميع الحقوق محفوظة.</p>
+                <p>صممت بحب لمساعدة الطلاب على التعلم بفعالية</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // بيانات الدروس
+        const lessonsData = {
+            'رياضيات': [
+                { title: 'المقدمة في الرياضيات', videoId: 'A1' },
+                { title: 'الجبر الأساسي', videoId: 'A2' },
+                { title: 'المعادلات الخطية', videoId: 'A3' },
+                { title: 'الهندسة المستوية', videoId: 'A4' },
+                { title: 'حساب المثلثات', videoId: 'A5' },
+                { title: 'الإحصاء والاحتمالات', videoId: 'A6' },
+                { title: 'التفاضل والتكامل', videoId: 'A7' },
+                { title: 'المتتاليات والمتسلسلات', videoId: 'A8' },
+                { title: 'التحليل العددي', videoId: 'A9' },
+                { title: 'المراجعة النهائية', videoId: 'A10' }
+            ],
+            'فيزياء': [
+                { title: 'المقدمة في الفيزياء', videoId: 'B1' },
+                { title: 'الميكانيكا', videoId: 'B2' },
+                { title: 'الديناميكا الحرارية', videoId: 'B3' },
+                { title: 'الكهرومغناطيسية', videoId: 'B4' },
+                { title: 'الضوء والبصريات', videoId: 'B5' },
+                { title: 'الفيزياء الحديثة', videoId: 'B6' },
+                { title: 'الفيزياء النووية', videoId: 'B7' },
+                { title: 'الفيزياء الفلكية', videoId: 'B8' },
+                { title: 'فيزياء الكم', videoId: 'B9' },
+                { title: 'المراجعة النهائية', videoId: 'B10' }
+            ],
+            'كيمياء': [
+                { title: 'المقدمة في الكيمياء', videoId: 'C1' },
+                { title: 'الجدول الدوري', videoId: 'C2' },
+                { title: 'الروابط الكيميائية', videoId: 'C3' },
+                { title: 'التفاعلات الكيميائية', videoId: 'C4' },
+                { title: 'الكيمياء الحرارية', videoId: 'C5' },
+                { title: 'الكيمياء العضوية', videoId: 'C6' },
+                { title: 'الكيمياء التحليلية', videoId: 'C7' },
+                { title: 'الكيمياء الصناعية', videoId: 'C8' },
+                { title: 'كيمياء البوليمرات', videoId: 'C9' },
+                { title: 'المراجعة النهائية', videoId: 'C10' }
+            ],
+            'أحياء': [
+                { title: 'المقدمة في الأحياء', videoId: 'D1' },
+                { title: 'الخلية وتركيبها', videoId: 'D2' },
+                { title: 'علم الوراثة', videoId: 'D3' },
+                { title: 'التطور والتصنيف', videoId: 'D4' },
+                { title: 'علم البيئة', videoId: 'D5' },
+                { title: 'علم النبات', videoId: 'D6' },
+                { title: 'علم الحيوان', videoId: 'D7' },
+                { title: 'علم الأحياء الدقيقة', videoId: 'D8' },
+                { title: 'التكنولوجيا الحيوية', videoId: 'D9' },
+                { title: 'المراجعة النهائية', videoId: 'D10' }
+            ]
+        };
+
+        // بيانات الاختبارات
+        const quizzesData = {
+            'رياضيات': [
+                {
+                    question: 'ما هي نتيجة جمع العددين 15 و 27؟',
+                    options: ['32', '42', '52', '62'],
+                    answer: 1
+                },
+                {
+                    question: 'ما هو محيط الدائرة التي نصف قطرها 7 سم؟ (ط ≈ 3.14)',
+                    options: ['14 سم', '21.98 سم', '43.96 سم', '153.86 سم'],
+                    answer: 2
+                },
+                {
+                    question: 'ما هو حل المعادلة: 3س + 5 = 20؟',
+                    options: ['س = 3', 'س = 5', 'س = 7', 'س = 9'],
+                    answer: 1
+                },
+                {
+                    question: 'ما هو مربع العدد 9؟',
+                    options: ['18', '27', '81', '729'],
+                    answer: 2
+                },
+                {
+                    question: 'ما هو العدد الأولي من الأعداد التالية؟',
+                    options: ['15', '21', '23', '27'],
+                    answer: 2
+                }
+            ],
+            'فيزياء': [
+                {
+                    question: 'ما هي وحدة قياس القوة في النظام الدولي؟',
+                    options: ['جول', 'نيوتن', 'واط', 'باسكال'],
+                    answer: 1
+                },
+                {
+                    question: 'ما هي سرعة الضوء في الفراغ تقريبًا؟',
+                    options: ['300 كم/ث', '3,000 كم/ث', '30,000 كم/ث', '300,000 كم/ث'],
+                    answer: 3
+                },
+                {
+                    question: 'ما هو قانون نيوتن الأول المعروف باسم؟',
+                    options: ['قانون القصور الذاتي', 'قانون التسارع', 'قانون الفعل ورد الفعل', 'قانون الجذب العام'],
+                    answer: 0
+                },
+                {
+                    question: 'ما هي الطاقة التي يكتسبها الجسم بسبب موضعه؟',
+                    options: ['الطاقة الحركية', 'الطاقة الكامنة', 'الطاقة الحرارية', 'الطاقة الكهربائية'],
+                    answer: 1
+                },
+                {
+                    question: 'ما هو الجهاز المستخدم لقياس الضغط الجوي؟',
+                    options: ['البارومتر', 'الترمومتر', 'الأنيمومتر', 'الهيجرومتر'],
+                    answer: 0
+                }
+            ],
+            'كيمياء': [
+                {
+                    question: 'ما هو الرمز الكيميائي للذهب؟',
+                    options: ['Go', 'Gd', 'Au', 'Ag'],
+                    answer: 2
+                },
+                {
+                    question: 'ما هو الغاز الذي يشكل حوالي 78% من الغلاف الجوي للأرض؟',
+                    options: ['الأكسجين', 'ثاني أكسيد الكربون', 'النيتروجين', 'الهيدروجين'],
+                    answer: 2
+                },
+                {
+                    question: 'ما هو الرقم الهيدروجيني للمحلول المتعادل؟',
+                    options: ['0', '7', '10', '14'],
+                    answer: 1
+                },
+                {
+                    question: 'ما هي العملية التي تتحول فيها المادة من الحالة الصلبة إلى الحالة الغازية مباشرة؟',
+                    options: ['التكثيف', 'التسامي', 'التجمد', 'التبخر'],
+                    answer: 1
+                },
+                {
+                    question: 'ما هو العنصر الكيميائي الذي عدده الذري 1؟',
+                    options: ['الهيليوم', 'الهيدروجين', 'الأكسجين', 'الكربون'],
+                    answer: 1
+                }
+            ],
+            'أحياء': [
+                {
+                    question: 'ما هي عضية الخلية المسؤولة عن إنتاج الطاقة؟',
+                    options: ['النواة', 'الميتوكوندريا', 'الريبوسوم', 'جهاز جولجي'],
+                    answer: 1
+                },
+                {
+                    question: 'ما هي العملية التي تنتج بها النباتات غذائها؟',
+                    options: ['التنفس', 'التمثيل الضوئي', 'التخمر', 'الانقسام المتساوي'],
+                    answer: 1
+                },
+                {
+                    question: 'ما هو عدد الكروموسومات في الإنسان؟',
+                    options: ['23', '46', '64', '92'],
+                    answer: 1
+                },
+                {
+                    question: 'ما هو الجزء المسؤول عن نقل الأكسجين في الدم؟',
+                    options: ['البلازما', 'الصفائح الدموية', 'خلايا الدم البيضاء', 'خلايا الدم الحمراء'],
+                    answer: 3
+                },
+                {
+                    question: 'ما هو أكبر عضو في جسم الإنسان؟',
+                    options: ['القلب', 'الكبد', 'الجلد', 'الدماغ'],
+                    answer: 2
+                }
+            ]
+        };
+
+        // المتغيرات العامة
+        let currentSubject = '';
+        let currentLesson = '';
+        let currentQuality = '240';
+        let currentQuiz = '';
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let selectedOption = null;
+
+        // عناصر DOM
+        const educationPage = document.getElementById('educationPage');
+        const testsPage = document.getElementById('testsPage');
+        const educationLink = document.getElementById('educationLink');
+        const testsLink = document.getElementById('testsLink');
+        const subjectsContainer = document.getElementById('subjectsContainer');
+        const lessonsContainer = document.getElementById('lessonsContainer');
+        const videoContainer = document.getElementById('videoContainer');
+        const videoTitle = document.getElementById('videoTitle');
+        const lessonVideo = document.getElementById('lessonVideo');
+        const testsContainer = document.getElementById('testsContainer');
+        const quizContainer = document.getElementById('quizContainer');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const nextBtn = document.getElementById('nextBtn');
+        const correctCount = document.getElementById('correctCount');
+        const wrongCount = document.getElementById('wrongCount');
+        const currentQuestion = document.getElementById('currentQuestion');
+
+        // تبديل الصفحات
+        educationLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            educationPage.style.display = 'block';
+            testsPage.style.display = 'none';
+            educationLink.classList.add('active');
+            testsLink.classList.remove('active');
+            showSubjects();
+        });
+
+        testsLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            educationPage.style.display = 'none';
+            testsPage.style.display = 'block';
+            educationLink.classList.remove('active');
+            testsLink.classList.add('active');
+            showTests();
+        });
+
+        // عرض الدروس للمادة المحددة
+        function showLessons(subject) {
+            currentSubject = subject;
+            subjectsContainer.style.display = 'none';
+            lessonsContainer.style.display = 'grid';
+            
+            // ملء الدروس
+            lessonsContainer.innerHTML = '';
+            lessonsData[subject].forEach((lesson, index) => {
+                const lessonBtn = document.createElement('button');
+                lessonBtn.className = 'lesson-btn';
+                lessonBtn.textContent = `الدرس ${index + 1}`;
+                lessonBtn.onclick = () => playVideo(lesson.title, lesson.videoId);
+                lessonsContainer.appendChild(lessonBtn);
+            });
+        }
+
+        // تشغيل الفيديو
+        function playVideo(title, videoId) {
+            currentLesson = videoId;
+            lessonsContainer.style.display = 'none';
+            videoContainer.style.display = 'block';
+            videoTitle.textContent = title;
+            
+            // هنا يمكنك إضافة مسار الفيديو الحقيقي
+            // في هذا المثال سنستخدم فيديو وهمي
+            lessonVideo.src = `https://example.com/videos/${videoId}_${currentQuality}.mp4`;
+            
+            // إعادة تعيين خيارات الجودة
+            document.querySelectorAll('.quality-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(currentQuality)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // تغيير جودة الفيديو
+        function changeQuality(quality) {
+            currentQuality = quality;
+            document.querySelectorAll('.quality-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // تغيير مصدر الفيديو بناءً على الجودة المختارة
+            lessonVideo.src = `https://example.com/videos/${currentLesson}_${currentQuality}.mp4`;
+            lessonVideo.load();
+            lessonVideo.play();
+        }
+
+        // تنزيل الفيديو (سيتم فتحه في نافذة جديدة بدلاً من التنزيل)
+        function downloadVideo() {
+            const downloadUrl = `https://example.com/videos/${currentLesson}_720.mp4`;
+            window.open(downloadUrl, '_blank');
+        }
+
+        // العودة إلى قائمة الدروس
+        function backToLessons() {
+            videoContainer.style.display = 'none';
+            lessonsContainer.style.display = 'grid';
+            lessonVideo.pause();
+        }
+
+        // العودة إلى قائمة المواد
+        function showSubjects() {
+            subjectsContainer.style.display = 'grid';
+            lessonsContainer.style.display = 'none';
+            videoContainer.style.display = 'none';
+            lessonVideo.pause();
+        }
+
+        // عرض الاختبارات
+        function showTests() {
+            testsContainer.style.display = 'grid';
+            quizContainer.style.display = 'none';
+        }
+
+        // بدء الاختبار
+        function startQuiz(subject) {
+            currentQuiz = subject;
+            testsContainer.style.display = 'none';
+            quizContainer.style.display = 'block';
+            
+            // إعادة تعيين المتغيرات
+            currentQuestionIndex = 0;
+            correctAnswers = 0;
+            wrongAnswers = 0;
+            selectedOption = null;
+            
+            // تحديث العداد
+            correctCount.textContent = '0';
+            wrongCount.textContent = '0';
+            currentQuestion.textContent = '1';
+            
+            // عرض السؤال الأول
+            displayQuestion();
+        }
+
+        // عرض السؤال الحالي
+        function displayQuestion() {
+            const quiz = quizzesData[currentQuiz][currentQuestionIndex];
+            questionText.textContent = quiz.question;
+            currentQuestion.textContent = currentQuestionIndex + 1;
+            
+            // ملء الخيارات
+            optionsContainer.innerHTML = '';
+            quiz.options.forEach((option, index) => {
+                const optionBtn = document.createElement('button');
+                optionBtn.className = 'option-btn';
+                optionBtn.textContent = option;
+                optionBtn.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionBtn);
+            });
+            
+            // إخفاء زر التالي حتى يتم اختيار إجابة
+            nextBtn.style.display = 'none';
+        }
+
+        // اختيار إجابة
+        function selectOption(index) {
+            // إلغاء تحديد الخيار السابق إذا كان موجودًا
+            if (selectedOption !== null) {
+                optionsContainer.children[selectedOption].classList.remove('selected');
+            }
+            
+            // تحديد الخيار الجديد
+            selectedOption = index;
+            optionsContainer.children[index].classList.add('selected');
+            
+            // عرض زر التالي
+            nextBtn.style.display = 'block';
+        }
+
+        // الانتقال إلى السؤال التالي
+        function nextQuestion() {
+            const quiz = quizzesData[currentQuiz][currentQuestionIndex];
+            
+            // التحقق من الإجابة
+            if (selectedOption === quiz.answer) {
+                optionsContainer.children[selectedOption].classList.add('correct');
+                correctAnswers++;
+                correctCount.textContent = correctAnswers;
+            } else {
+                optionsContainer.children[selectedOption].classList.add('wrong');
+                optionsContainer.children[quiz.answer].classList.add('correct');
+                wrongAnswers++;
+                wrongCount.textContent = wrongAnswers;
+            }
+            
+            // تعطيل جميع الأزرار
+            for (let i = 0; i < optionsContainer.children.length; i++) {
+                optionsContainer.children[i].disabled = true;
+            }
+            
+            // تغيير نص زر التالي إذا كان هذا آخر سؤال
+            if (currentQuestionIndex === quizzesData[currentQuiz].length - 1) {
+                nextBtn.textContent = 'إنهاء الاختبار';
+                nextBtn.onclick = finishQuiz;
+            } else {
+                nextBtn.textContent = 'السؤال التالي';
+                nextBtn.onclick = goToNextQuestion;
+            }
+        }
+
+        // الانتقال إلى السؤال التالي
+        function goToNextQuestion() {
+            currentQuestionIndex++;
+            selectedOption = null;
+            displayQuestion();
+            nextBtn.textContent = 'التالي';
+            nextBtn.onclick = nextQuestion;
+        }
+
+        // إنهاء الاختبار
+        function finishQuiz() {
+            alert(`تم إنهاء الاختبار!\n\nالإجابات الصحيحة: ${correctAnswers}\nالإجابات الخاطئة: ${wrongAnswers}`);
+            backToTests();
+        }
+
+        // العودة إلى قائمة الاختبارات
+        function backToTests() {
+            quizContainer.style.display = 'none';
+            testsContainer.style.display = 'grid';
+        }
+    </script>
+</body>
+</html>
