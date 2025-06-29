@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التعليم التفاعلية</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <h1>منصة التعليم الذكي</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active"><i class="fas fa-book-open"></i> الدروس</a></li>
+                <li><a href="exams.html"><i class="fas fa-question-circle"></i> الاختبارات</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="welcome-section">
+            <h2>مرحباً بك في منصة التعليم التفاعلي</h2>
+            <p>اختر المادة التي تريد دراستها من القائمة أدناه</p>
+        </section>
+
+        <section class="subjects-section">
+            <!-- الرياضيات -->
+            <div class="subject-card" data-subject="math">
+                <div class="subject-icon">
+                    <i class="fas fa-square-root-alt"></i>
+                </div>
+                <h3>الرياضيات</h3>
+                <p>12 ساعة تعليمية</p>
+                <button class="btn open-subject">فتح الدروس</button>
+            </div>
+
+            <!-- العلوم -->
+            <div class="subject-card" data-subject="science">
+                <div class="subject-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h3>العلوم</h3>
+                <p>10 ساعات تعليمية</p>
+                <button class="btn open-subject">فتح الدروس</button>
+            </div>
+
+            <!-- اللغة العربية -->
+            <div class="subject-card" data-subject="arabic">
+                <div class="subject-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>اللغة العربية</h3>
+                <p>8 ساعات تعليمية</p>
+                <button class="btn open-subject">فتح الدروس</button>
+            </div>
+
+            <!-- اللغة الإنجليزية -->
+            <div class="subject-card" data-subject="english">
+                <div class="subject-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h3>اللغة الإنجليزية</h3>
+                <p>9 ساعات تعليمية</p>
+                <button class="btn open-subject">فتح الدروس</button>
+            </div>
+        </section>
+
+        <!-- دروس المادة (تظهر عند الضغط على مادة) -->
+        <section class="lessons-section hidden">
+            <div class="back-to-subjects">
+                <button class="btn back-btn"><i class="fas fa-arrow-right"></i> العودة إلى المواد</button>
+            </div>
+            <h2 class="subject-title"></h2>
+            <div class="lessons-container">
+                <!-- الدروس تضاف هنا بالجافاسكريبت -->
+            </div>
+        </section>
+
+        <!-- مشغل الفيديو (يظهر عند الضغط على درس) -->
+        <section class="video-section hidden">
+            <div class="back-to-lessons">
+                <button class="btn back-btn"><i class="fas fa-arrow-right"></i> العودة إلى الدروس</button>
+            </div>
+            <h2 class="lesson-title"></h2>
+            <div class="video-container">
+                <video id="lesson-video" controls>
+                    <source src="" type="video/mp4">
+                    متصفحك لا يدعم تشغيل الفيديوهات.
+                </video>
+            </div>
+            <div class="video-quality">
+                <h3>اختر جودة الفيديو:</h3>
+                <div class="quality-buttons">
+                    <button class="btn quality-btn" data-quality="240">240p</button>
+                    <button class="btn quality-btn" data-quality="360">360p</button>
+                    <button class="btn quality-btn" data-quality="480">480p</button>
+                    <button class="btn quality-btn" data-quality="720">720p</button>
+                </div>
+            </div>
+            <div class="download-section">
+                <button class="btn download-btn" disabled>
+                    <i class="fas fa-download"></i> التحميل متاح فقط عبر الموقع
+                </button>
+                <p class="download-info">لحفظ الفيديو للعرض بدون إنترنت، يرجى استخدام خاصية التحميل عبر الموقع.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2023 منصة التعليم التفاعلي. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
